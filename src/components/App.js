@@ -5,7 +5,7 @@ import PostList from './postList/PostList'
 import * as PostsApi from '../api/postApi'
 import { connect } from 'react-redux'
 import { getPosts } from '../actions/index'
-
+import { BrowserRouter } from 'react-router-dom'
 class App extends Component {
 
   componentDidMount() {
@@ -15,19 +15,22 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <div className="container">
-          <Route exact path='/' component={(props) => <PostList cat='all' posts={this.props.posts}/>} />
+      <BrowserRouter>
+        <div>
+          <Header />
+          <div className="container">
+            <Route exact path='/' component={PostList} />
+            <Route exact path="/:cat" component={PostList} />
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts.posts
+    posts: state.posts.posts,
   }
 }
 
