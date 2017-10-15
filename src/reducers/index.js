@@ -1,28 +1,35 @@
-import { ADD_CATEGORY, ADD_POST } from '../actions/index'
+import { GET_CATEGORIES, GET_POSTS, ADD_COMMENT } from '../actions/index'
 import { combineReducers } from 'redux'
 
-function cats(state = { cats: [] }, action) {
+function cats(state = {cats: []}, action) {
   switch (action.type) {
-    case ADD_CATEGORY: {
-      console.log(state.cats.type)
-      return { cats: state.cats.push(action.cats) }
+    case GET_CATEGORIES: {
+      return {...state, cats: [...state['cats'], ...action.cats]}
     }
     default:
       return state
   }
 }
 
-function posts(state = { posts: [] }, action) {
+function posts(state = {posts: []}, action) {
   switch (action.type) {
-    case ADD_POST: {
-      return Object.assign({}, { ...state }, { posts: [...state.posts, action.posts]})
-    }
+    case GET_POSTS: 
+      return  {...state, posts: [...state['posts'], ...action.posts]}
     default:
       return state
+  }
+}
+function coms(state={}, action){
+  switch(action.type){
+    case ADD_COMMENT:
+      return {...state, coms: [...state['coms'], action.coms]}
+    default: 
+    return state
   }
 }
 
 export default combineReducers({
   cats,
-  posts
+  posts,
+  coms
 })

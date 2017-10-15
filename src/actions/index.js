@@ -1,16 +1,24 @@
-export const ADD_CATEGORY = `ADD_CATEGORY`
-export const ADD_POST = `ADD_POST`
+export const GET_CATEGORIES = `GET_CATEGORIES`
+export const GET_POSTS = `GET_POSTS`
+export const ADD_COMMENT = `ADD_COMMENT`
 
-export function addCategories(cats){
+export function getCategoties(cats){
   return {
-    type: ADD_CATEGORY,
+    type: GET_CATEGORIES,
     cats
   }
 }
 
-export function addPosts(posts){
+export function getPosts(posts){
   return {
-    type: ADD_POST,
+    type: GET_POSTS,
     posts
+  }
+}
+
+export function addComment(coms){
+  return {
+    type: ADD_COMMENT,
+    coms
   }
 }
