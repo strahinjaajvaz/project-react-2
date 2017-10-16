@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Route } from 'react-router'
 import Header from './header/Header'
 import PostList from './postList/PostList'
+import EditCreatePost from './postList/post/EditCreatePost'
 import * as PostsApi from '../api/postApi'
 import { connect } from 'react-redux'
 import { getPosts } from '../actions/index'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
+
 class App extends Component {
 
   componentDidMount() {
@@ -19,8 +21,12 @@ class App extends Component {
         <div>
           <Header />
           <div className="container">
-            <Route exact path='/' component={PostList} />
-            <Route exact path="/:cat" component={PostList} />
+            <Switch>
+              <Route exact path='/' component={PostList} />
+              <Route exact path="/editCreatePost" component={EditCreatePost} />
+              <Route exact path="/:cat" component={PostList} />
+              <Route exact path="/editCreatePost/:id" component={EditCreatePost} />
+            </Switch>
           </div>
         </div>
       </BrowserRouter>

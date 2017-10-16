@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, GET_POSTS, ADD_COMMENT } from '../actions/index'
+import { GET_CATEGORIES, GET_POSTS, ADD_POST, EDIT_POST, ADD_COMMENT } from '../actions/index'
 import { combineReducers } from 'redux'
 
 function cats(state = {cats: []}, action) {
@@ -15,6 +15,8 @@ function posts(state = {posts: []}, action) {
   switch (action.type) {
     case GET_POSTS: 
       return  {...state, posts: [...state['posts'], ...action.posts]}
+    case ADD_POST:
+      return {...state, posts: [...state['posts'], action.post]}
     default:
       return state
   }

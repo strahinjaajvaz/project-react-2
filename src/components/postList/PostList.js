@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Post from './post/Post'
 import arraySort from 'array-sort'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class PostList extends Component {
   constructor(props) {
@@ -20,15 +21,18 @@ class PostList extends Component {
     const list = this.props.match.url.replace("/", "") === "" ?
       this.props.posts :
       this.props.posts.filter(p => p.category === this.props.match.url.replace("/", ""))
-      
+
     console.log(list)
     return (<div className="container">
-      <div className='d-block text-right mb-3'>
-        sortby:
+      <div className="clearflix mb-3">
+        <Link to='/editCreatePost' className="btn btn-light">Add Post</Link>
+        <div className='d-block float-right mb-3'>
+          sortby:
         <select onChange={this.changeOrderFilter} name="sortBy" id="" className='ml-2' defaultValue={this.state.sortBy} >
-          <option value="timestamp">Date</option>
-          <option value="voteScore">Votes</option>
-        </select>
+            <option value="timestamp">Date</option>
+            <option value="voteScore">Votes</option>
+          </select>
+        </div>
       </div>
       <div>
         {arraySort(list, this.state.sortBy).map((p, i) => <Post key={i} post={p} />)}
