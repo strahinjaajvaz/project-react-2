@@ -1,6 +1,7 @@
 export const url = `http://localhost:3001`
 
-export const header = {
-  headers: { 'Authorization': 'whatever-you-want' },
+export const headers = {
+  'Accept': 'application/json',
+  'Authorization':  'whatever-you-want',
   'Content-Type': 'application/json'
 }
