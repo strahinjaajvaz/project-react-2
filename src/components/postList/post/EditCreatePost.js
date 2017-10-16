@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import * as PostApi from '../../../api/postApi'
+import { addPost } from '../../../actions/index'
 import uuid from 'uuid'
 
 class EditCreatePost extends Component {
@@ -19,8 +21,14 @@ class EditCreatePost extends Component {
       voteScore: 1,
       deleted: false
     }
-    PostApi.addPost(newPost).then(() => console.log('completed'))
 
+    console.log(this.props)
+    PostApi.addPost(newPost).then((res) => {
+      if (res == 200) {
+        this.props.addSinglePost(newPost)
+        this.props.history.push(`/${this.category.value}`)
+      }
+    })
   }
 
   // if edit have the value populated otherwise ignore
@@ -57,9 +65,15 @@ class EditCreatePost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    post: "",
+    post: state.posts.posts,
     cats: state.cats.cats
   }
 }
 
-export default connect(mapStateToProps)(EditCreatePost)
+const mapDispatchToState = (dispatch) => {
+  return {
+    addSinglePost: (post) => dispatch(addPost(post))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToState)(EditCreatePost)

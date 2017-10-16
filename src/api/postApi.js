@@ -12,5 +12,5 @@ export const addPost = (post) => {
       ...headers
     },
     body: JSON.stringify(post)
-  }).then(res => console.log(res))
+  }).then(res => res.status)
 }

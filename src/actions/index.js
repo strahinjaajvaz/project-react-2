@@ -19,6 +19,7 @@ export function getPosts(posts){
 }
 
 export function addPost(post){
+  console.log('add', post)
   return{
     type: ADD_POST,
     post
